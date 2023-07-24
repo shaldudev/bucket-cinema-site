@@ -11,7 +11,7 @@ router.get('/auth/steam/return', passport.authenticate('steam', { failureRedirec
     (req: Request, res: Response) => {
         steamAuth(req, res);
     });
-
 router.get('/:steamId', authenticateToken, getUser)
+
 
 export default router;

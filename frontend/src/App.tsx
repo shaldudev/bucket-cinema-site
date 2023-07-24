@@ -34,14 +34,14 @@ function App() {
   React.useEffect(() => {
 
     async function checkAuth() {
-
+   
       if (user != null) return;
-
+          
       //get user from cookie
       const sessionId = Cookies.get('sessionid');
       const userId = Cookies.get('userid');
 
-      if (userId == null || sessionId == null || userId == '' || sessionId == '') return;
+      if (!userId || !sessionId) return;
 
       try {
         const response = await API.get(`/user/${userId}`);
@@ -52,13 +52,10 @@ function App() {
           }
         }
       } catch (error) {
-
         Cookies.remove('sessionid');
         Cookies.remove('steamid');
       }
 
-      Cookies.remove('sessionid');
-      Cookies.remove('steamid');
     }
 
     checkAuth();

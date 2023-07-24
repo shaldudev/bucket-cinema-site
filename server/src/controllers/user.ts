@@ -23,20 +23,32 @@ const steamAuth = async (req: Request, res: Response) => {
             }
         });
     }
+    //maybe solve this diefferently once domain is set up
 
-    res.cookie('sessionid', sessionId, { domain: ('.' + DOMAIN) });
-    res.cookie('userid', user.id, { domain: ('.' + DOMAIN) });
+    res.cookie('sessionid', sessionId);
+    res.cookie('userid', user.id);
     res.status(200).redirect(WEB_HOST);
 };
 
 const getUser = async (req: Request, res: Response) => {
+
     const steamId = req.params.steamId ?? '';
-    const userId = req.params.userId ?? '';
-    const sessionId = req.headers.sessionid as string;
+    let userId = req.params.userId ?? '';
+    const sessionId = req.header('sessionId')
+
+    
+    //get /me route
+    if (req.params.steamId === 'me') {
+        userId = req.header('userId') as string ?? '';
+        if (!userId) {
+            res.status(402).json({ error: 'Not authorized' });
+            return;
+        }
+    }
 
     let id = '';
     //check if either steamId or userId is provided
-    if (steamId) {
+    if (steamId && steamId !== 'me') {
         id = steamId;
     } else if (userId) {
         id = userId;
@@ -44,7 +56,7 @@ const getUser = async (req: Request, res: Response) => {
         res.status(400).json({ error: 'No steamId or userId provided' });
         return;
     }
-
+    
     const user = await prisma.user.findMany({
         where: {
             OR: [
