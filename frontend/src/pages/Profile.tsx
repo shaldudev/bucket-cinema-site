@@ -29,7 +29,7 @@ export default function Profile() {
     return (
         <Container maxWidth="md" >
             <Box className={styles.boxcontainer}>
-                <Profileheader username={userProfile?.username} avatarUrl={userProfile?.avatar} />
+                <Profileheader username={userProfile?.username} avatarUrl={userProfile?.avatar} rank={userProfile?.rank} credits={userProfile?.credits}/>
             </Box>
         </Container>
     )

@@ -75,8 +75,32 @@ const getUser = async (req: Request, res: Response) => {
         authenticated = true;
     }
     
-    res.json({ user:{... user[0] as User, sessions: undefined, lastLogin: undefined, createdAt: undefined, id: undefined}, authenticated });
+    const rank = await getUserRank(user[0]);
+
+    res.json({ user:{... user[0] as User, rank, sessions: undefined, lastLogin: undefined, createdAt: undefined, id: undefined}, authenticated });
 };
 
+const getUserRank = async (user: User) => {
+    const userRank = await prisma.user.count({
+        where: {
+            OR: [
+                {
+                  credits: {
+                    gt: user.credits,
+                  },
+                },
+                {
+                  credits: user.credits,
+                  id: {
+                    gt: user.id,
+                  },
+                },
+              ],
+        }
+    });
 
-export { getUser, steamAuth };
+    return userRank + 1;
+}
+
+
+export { getUser, steamAuth, getUserRank };
