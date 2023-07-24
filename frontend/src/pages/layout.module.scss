@@ -1,0 +1,25 @@
+.boxcontainer{
+    height: 100%;
+    width: 100%;
+    min-height: calc(100vh - 40px);
+    position: relative;
+    border-radius: 8px;
+    padding: 25px;
+
+
+    &::after {
+        content: "";
+        top: 0;
+        left: 0;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        min-height: calc(100vh - 40px);
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,0.654499299719888) 0%, rgba(255,255,255,0.3) 80%, rgba(255,255,255,0) 95%);
+        filter: blur(2px);
+        filter: brightness(.4);
+        z-index: -1;
+    }
+
+}

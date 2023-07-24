@@ -1,0 +1,91 @@
+.rank {
+    margin-left: 20px;
+}
+
+.rank {
+    $color : #838383f6;
+
+    margin-left: 20px;
+    position: relative;
+    top: -8px;
+    border-radius: 25px;
+    width: 50px;
+    height: 50px;
+    background-color: rgba($color: $color, $alpha: .5);
+    border: 2px solid $color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: normal;
+}
+
+
+.r1 {
+    $color : #da1818;
+    background-color: rgba($color: $color, $alpha: .5);
+    border: 2px solid $color;
+}
+
+.r2 {
+    $color : #da9618;
+    background-color: rgba($color: $color, $alpha: .5);
+    border: 2px solid $color;
+}
+
+.r3 {
+    $color : #527403;
+    background-color: rgba($color: $color, $alpha: .5);
+    border: 2px solid $color;
+}
+
+.r4 {
+    $color : #1e6b9b;
+    background-color: rgba($color: $color, $alpha: .5);
+    border: 2px solid $color;
+}
+
+.r5 {
+    $color : #3c3eca;
+    background-color: rgba($color: $color, $alpha: .5);
+    border: 2px solid $color;
+}
+
+.r6 {
+    $color : #412575;
+    background-color: rgba($color: $color, $alpha: .5);
+    border: 2px solid $color;
+}
+
+.r7 {
+    $color : #9e788f;
+    background-color: rgba($color: $color, $alpha: .5);
+    border: 2px solid $color;
+}
+
+.r8 {
+    $color : #815d5d;
+    background-color: rgba($color: $color, $alpha: .5);
+    border: 2px solid $color;
+}
+
+.r9 {
+    $color : #b89f76;
+    background-color: rgba($color: $color, $alpha: .5);
+    border: 2px solid $color;
+}
+
+.r10 {
+    $color : rgb(160, 149, 122);
+    background-color: rgba($color: $color, $alpha: .5);
+    border: 2px solid $color;
+}
+
+.small {
+    font-size: 18px;
+}
+
+.end {
+    font-size: 16px;
+}

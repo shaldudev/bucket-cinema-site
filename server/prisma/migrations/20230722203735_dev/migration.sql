@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "credits" BIGINT NOT NULL DEFAULT 0;

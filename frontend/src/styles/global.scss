@@ -1,0 +1,36 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+#background {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background: url("../../public/assets/images/loop-bg.png");
+    background-size: 300px;
+    opacity: .1;
+    z-index: -1;
+}
+
+
+.children-loader {
+    filter: blur(3px);
+    width: 100%;
+    
+    //if contains .MuiTypography-
+    [class^="MuiTypography-"] {
+        opacity: .8;
+    }
+
+    .MuiTypography-h4{
+
+    }
+
+    .MuiTypography-h5{
+
+    }
+    .load-hidden{
+        display: none;
+    }
+}

@@ -1,0 +1,25 @@
+.boxed {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .circle{
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        width: 100px;
+        height: 100px;
+    }
+
+    &::after {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgb(0, 0, 0);
+        opacity: .1;
+        border-radius: 8px;
+    }
+}
