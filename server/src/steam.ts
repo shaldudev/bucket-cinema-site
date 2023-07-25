@@ -37,6 +37,12 @@ export default async function initSteam() {
                     steamId: profile.id,
                     username: profile.displayName,
                     avatar: profile.photos[2].value,
+                    currency: {
+                        create: {
+                            credits: 1000,
+                            passiveIncome: 100,
+                        }
+                    }
                 },
             });
         } else {

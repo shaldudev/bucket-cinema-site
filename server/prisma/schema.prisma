@@ -8,14 +8,22 @@ datasource db {
 }
 
 model User {
-  id        String      @id @default(uuid())
+  id        String      @id @default(uuid()) @unique
   steamId   String      @unique
   username  String
   avatar    String
-  credits   Int         @default(0)
+  currency  Currency?
   sessions  Session[]
   createdAt DateTime    @default(now())
   lastLogin DateTime    @default(now())
+}
+
+model Currency {
+  id        String      @id @default(uuid()) @unique
+  credits   Int         @default(0)
+  passiveIncome Int     @default(0)
+  userId    String      @unique
+  user      User        @relation(fields: [userId], references: [id])
 }
 
 model Session {

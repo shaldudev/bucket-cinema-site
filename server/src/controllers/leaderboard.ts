@@ -19,12 +19,19 @@ const getLeaderboard = async (req: Request, res: Response) => {
                 steamId: true,
                 username: true,
                 avatar: true,
-                credits: true,
+                currency: {
+                    select: {
+                        credits: true
+                    }
+                }
             },
             orderBy: {
-                credits: 'desc'
+                currency: {
+                    credits: 'desc'
+                }
             },
-            take: 100
+            
+            take: 100,
         });
 
         const leaderboardUsers: LeaderboardUser[] = users.map((user, index) => {
@@ -32,7 +39,7 @@ const getLeaderboard = async (req: Request, res: Response) => {
                 steamId: user.steamId,
                 avatar: user.avatar,
                 username: user.username,
-                credits: user.credits,
+                credits: user.currency?.credits ?? 0,
                 rank: index + 1
             }
         });
@@ -70,7 +77,13 @@ async function createUser(user: any) {
             steamId: newSteamId.toString(),
             username: (user?.username ?? '') + Math.floor(Math.random() * 209),
             avatar: user?.avatar ?? '',
-            credits: Math.floor(Math.random() * 100000)
+            currency: {
+                create: {
+                    credits: 1000,
+                }
+            }
+        }, include: {
+            currency: true
         }
     });
 }

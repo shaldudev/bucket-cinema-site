@@ -36,7 +36,7 @@ const getUser = async (req: Request, res: Response) => {
     let userId = req.params.userId ?? '';
     const sessionId = req.header('sessionId')
 
-    
+
     //get /me route
     if (req.params.steamId === 'me') {
         userId = req.header('userId') as string ?? '';
@@ -56,7 +56,7 @@ const getUser = async (req: Request, res: Response) => {
         res.status(400).json({ error: 'No steamId or userId provided' });
         return;
     }
-    
+
     const user = await prisma.user.findMany({
         where: {
             OR: [
@@ -68,7 +68,8 @@ const getUser = async (req: Request, res: Response) => {
                 }
             ],
         }, include: {
-            sessions: true
+            sessions: true,
+            currency: true,
         }
     });
 
@@ -78,38 +79,43 @@ const getUser = async (req: Request, res: Response) => {
         res.status(404).json({ error: 'User not found' });
         return;
     }
-    
+
     const sessions = user[0].sessions;
-    
+
     //check if the session id is in the sessions table
     const session = sessions.find((session) => session.sessionId === sessionId);
     if (session) {
         authenticated = true;
     }
-    
+
     const rank = await getUserRank(user[0]);
 
-    res.json({ user:{... user[0] as User, rank, sessions: undefined, lastLogin: undefined, createdAt: undefined, id: undefined}, authenticated });
+    res.json({ user: { ...user[0] as User, rank, credits: user[0].currency?.credits ?? 0, sessions: undefined, lastLogin: undefined, createdAt: undefined, id: undefined }, authenticated });
 };
 
-const getUserRank = async (user: User) => {
+const getUserRank = async (user: any) => {
     const userRank = await prisma.user.count({
         where: {
             OR: [
                 {
-                  credits: {
-                    gt: user.credits,
-                  },
+                    currency: {
+                        credits: {
+                            gt: user.currency?.credits ?? 0,
+                        }
+                    },
                 },
                 {
-                  credits: user.credits,
-                  id: {
-                    gt: user.id,
-                  },
+                    currency: {
+                        credits: user.currency?.credits ?? 0,
+                    },
+                    id: {
+                        gt: user.id,
+                    },
                 },
-              ],
+            ],
         }
     });
+
 
     return userRank + 1;
 }
