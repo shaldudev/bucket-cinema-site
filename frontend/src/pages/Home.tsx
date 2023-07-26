@@ -2,6 +2,7 @@ import Button from '@mui/material/Button';
 import UserContext from '../userContext';
 import React, { useEffect } from 'react';
 import Game from './Game';
+import { Container } from '@mui/material';
 
 
 
@@ -15,7 +16,7 @@ export default function Home() {
     }, [user]);
 
     return (
-        <div>
+        <Container>
             <h1>Home</h1>
 
             {user &&
@@ -26,6 +27,6 @@ export default function Home() {
             }
             {!user && <Button variant="contained" href={API_URL + "/user/auth/steam/"}>Auth with steam</Button>}
 
-        </div>
+        </Container>
     )
 }

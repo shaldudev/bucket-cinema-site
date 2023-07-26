@@ -9,6 +9,8 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import UserContext from './userContext';
 import Leaderboard from './pages/Leaderboard';
+import Navigation from './components/Navigation';
+import Logout from './pages/Logout';
 
 const darkTheme = createTheme({
   palette: {
@@ -67,12 +69,13 @@ function App() {
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <UserContext.Provider value={{ user }}>
-
+          <Navigation />
           <Routes>
 
             <Route path="/" element={<Home />} />
             <Route path="/u/:id" element={<Profile />} />
             <Route path="/leaderboard" element={<Leaderboard/>} />
+            <Route path="/logout" element={<Logout/>} />
 
           </Routes>
 

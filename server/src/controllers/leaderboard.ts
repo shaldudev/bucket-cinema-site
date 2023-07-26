@@ -25,30 +25,34 @@ const getLeaderboard = async (req: Request, res: Response) => {
                     }
                 }
             },
-            orderBy: {
-                currency: {
-                    credits: 'desc'
+            orderBy: [
+                {
+                    currency: {
+                        credits: 'desc'
+                    }
+                },
+                {
+                    id: 'desc'
                 }
-            },
-            
+            ],
             take: 100,
         });
 
-        const leaderboardUsers: LeaderboardUser[] = users.map((user, index) => {
-            return {
-                steamId: user.steamId,
-                avatar: user.avatar,
-                username: user.username,
-                credits: user.currency?.credits ?? 0,
-                rank: index + 1
-            }
-        });
+    const leaderboardUsers: LeaderboardUser[] = users.map((user, index) => {
+        return {
+            steamId: user.steamId,
+            avatar: user.avatar,
+            username: user.username,
+            credits: user.currency?.credits ?? 0,
+            rank: index + 1
+        }
+    });
 
-        res.json({ "users": leaderboardUsers });
-    } catch (err) {
-        res.status(500).json({ error: 'Something went wrong' });
-        console.log(err);
-    }
+    res.json({ "users": leaderboardUsers });
+} catch (err) {
+    res.status(500).json({ error: 'Something went wrong' });
+    console.log(err);
+}
 }
 
 //REMEMBER TO REMOVE THIS :)
