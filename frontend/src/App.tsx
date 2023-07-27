@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import API from "./api";
 import Cookies from 'js-cookie';
 import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { CssVarsThemeOptions, Experimental_CssVarsProvider, Theme, ThemeOptions, ThemeProvider, createTheme, experimental_extendTheme } from '@mui/material/styles';
 import { User } from './@types/user';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
@@ -12,11 +12,11 @@ import Leaderboard from './pages/Leaderboard';
 import Navigation from './components/Navigation';
 import Logout from './pages/Logout';
 
-const darkTheme = createTheme({
+const themeOptions: ThemeOptions = {
   palette: {
     mode: 'dark',
     primary: {
-      main: '#1b1b1b'
+      main: '#d581ca'
     }
   },
   typography: {
@@ -25,20 +25,30 @@ const darkTheme = createTheme({
       'sans-serif',
     ].join(','),
   },
-});
+}
+
+const darkTheme = createTheme(themeOptions);
+
+const options: CssVarsThemeOptions = {
+  cssVarPrefix: 'app',
+  colorSchemes: {
+    dark: {
+      ... themeOptions,
+    }
+  }
+}
 
 function App() {
   const API_URL = process.env.REACT_APP_API_URL;
-  const hrefLink = API_URL + '/user/auth/steam';
 
   const [user, setUser] = React.useState<null | User>(null);
 
   React.useEffect(() => {
 
     async function checkAuth() {
-   
+
       if (user != null) return;
-          
+
       //get user from cookie
       const sessionId = Cookies.get('sessionid');
       const userId = Cookies.get('userid');
@@ -66,20 +76,24 @@ function App() {
 
   return (
     <Router>
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider  theme={darkTheme}>
         <CssBaseline />
-        <UserContext.Provider value={{ user }}>
-          <Navigation />
-          <Routes>
+        <Experimental_CssVarsProvider defaultColorScheme={'dark'} defaultMode='dark' theme={experimental_extendTheme(options)}>
 
-            <Route path="/" element={<Home />} />
-            <Route path="/u/:id" element={<Profile />} />
-            <Route path="/leaderboard" element={<Leaderboard/>} />
-            <Route path="/logout" element={<Logout/>} />
 
-          </Routes>
+          <UserContext.Provider value={{ user }}>
+            <Navigation />
+            <Routes>
 
-        </UserContext.Provider>
+              <Route path="/" element={<Home />} />
+              <Route path="/u/:id" element={<Profile />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/logout" element={<Logout />} />
+
+            </Routes>
+
+          </UserContext.Provider>
+        </Experimental_CssVarsProvider>
       </ThemeProvider>
     </Router>
   );

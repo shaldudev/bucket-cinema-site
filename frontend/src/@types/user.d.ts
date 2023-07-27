@@ -3,5 +3,6 @@ export type User = {
     username: string,
     rank: number,
     credits: number,
+    income: number,
     avatar: string
 }

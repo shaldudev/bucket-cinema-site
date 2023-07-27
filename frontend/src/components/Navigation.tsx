@@ -14,6 +14,9 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import UserContext from '../userContext';
 import LoginIcon from '@mui/icons-material/Login';
+import { Chip, Link } from '@mui/material';
+import CreditDisplay from './Creditdisplay';
+import styles from './navigation.module.scss'
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -108,9 +111,9 @@ export default function Navigation() {
                             {pages.map((page) => (
                                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">
-                                        <a href={page.href}>
+                                        <Link href={page.href} color={'inherit'}>
                                             {page.name}
-                                        </a>
+                                        </Link>
                                     </Typography>
                                 </MenuItem>
                             ))}
@@ -138,16 +141,17 @@ export default function Navigation() {
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
 
-                            <Button
+                            <Link
+                                color='inherit'
                                 key={page.name}
                                 onClick={handleCloseNavMenu}
                                 href={page.href}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                fontSize={18}
+                                fontWeight={700}
+                                underline='none'
                             >
-                                <Typography textAlign="center">
-                                    {page.name}
-                                </Typography>
-                            </Button>
+                                {page.name}
+                            </Link>
 
                         ))}
                     </Box>
@@ -155,11 +159,16 @@ export default function Navigation() {
 
                     {user ? (
                         <Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title="Your Credits" className={`${styles.creditssmall}`}>
+                                <Chip sx={{ marginRight: 2 }} label={<CreditDisplay credits={user.credits} />} />
+                            </Tooltip>
+
                             <Tooltip title="Open menu">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                     <Avatar alt={user?.username ?? ''} src={user?.avatar ?? ''} />
                                 </IconButton>
                             </Tooltip>
+
                             <Menu
                                 sx={{ mt: '45px' }}
                                 id="menu-appbar"
@@ -179,9 +188,9 @@ export default function Navigation() {
                                 {settings.map((setting) => (
                                     <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
                                         <Typography textAlign="center">
-                                            <a href={setting.href}>
+                                            <Link href={setting.href} color={'inherit'}>
                                                 {setting.name}
-                                            </a>
+                                            </Link>
                                         </Typography>
                                     </MenuItem>
                                 ))}

@@ -37,7 +37,7 @@ export default function Leaderboard() {
     }, [])
 
     return (
-        <Container maxWidth="md" >
+        <Container maxWidth="lg" >
             <Box className={styles.boxcontainer}>
                 <Leaderboardtable users={users} />
             </Box>

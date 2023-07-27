@@ -27,9 +27,9 @@ export default function Profile() {
     }, []);
 
     return (
-        <Container maxWidth="md" >
+        <Container maxWidth="lg" >
             <Box className={styles.boxcontainer}>
-                <Profileheader username={userProfile?.username} avatarUrl={userProfile?.avatar} rank={userProfile?.rank} credits={userProfile?.credits}/>
+                <Profileheader username={userProfile?.username} avatarUrl={userProfile?.avatar} rank={userProfile?.rank} credits={userProfile?.credits} steamId={userProfile?.steamId}/>
             </Box>
         </Container>
     )

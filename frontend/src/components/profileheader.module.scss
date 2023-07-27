@@ -1,0 +1,26 @@
+.steam-profil-button {
+    width: 100%;
+    margin-top: 10px !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+}
+
+.rankicon {
+    @media screen and (max-width: 768px) {
+        margin-top: 4px;
+    }
+}
+
+.mobile {
+    display: none;
+    @media screen and (max-width: 768px) {
+        display: block;
+    }
+}
+
+.desktop {
+    
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+}

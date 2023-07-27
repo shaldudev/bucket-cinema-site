@@ -90,7 +90,7 @@ const getUser = async (req: Request, res: Response) => {
 
     const rank = await getUserRank(user[0]);
 
-    res.json({ user: { ...user[0] as User, rank, credits: user[0].currency?.credits ?? 0, sessions: undefined, lastLogin: undefined, createdAt: undefined, id: undefined }, authenticated });
+    res.json({ user: { ...user[0] as User, rank, income: user[0].currency?.passiveIncome ?? 0 , credits: user[0].currency?.credits ?? 0, sessions: undefined, lastLogin: undefined, createdAt: undefined, id: undefined, currency: undefined }, authenticated });
 };
 
 const getUserRank = async (user: any) => {

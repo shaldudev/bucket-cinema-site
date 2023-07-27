@@ -2,6 +2,9 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 import { styled } from '@mui/material/styles';
 import API from '../api';
 import React from 'react';
+import CreditDisplay from '../components/Creditdisplay';
+import { Typography } from '@mui/material';
+import TimeDisplay from './TimeDisplay';
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
@@ -23,7 +26,11 @@ type Progress = {
     increment: number
 }
 
-export default function PassiveIncomeProgressbar() {
+type Props = {
+    income?: number
+}
+
+export default function PassiveIncomeProgressbar({ income }: Props) {
 
     const [progress, setProgress] = React.useState<Progress | null>(null);
     const [interval, setInt] = React.useState<NodeJS.Timer | null>(null);
@@ -77,7 +84,16 @@ export default function PassiveIncomeProgressbar() {
 
     return (
         <>
-            <BorderLinearProgress variant="determinate" value={normalise(progress?.currValue ?? 0)} />
+            <Typography variant="caption">You earn: <strong><CreditDisplay size={12} credits={income ?? 0} /></strong> every <strong><TimeDisplay timeEnum={"MINUTES"} seconds={progress?.maxValue ?? 0} /></strong> Minutes</Typography>
+            <BorderLinearProgress sx={{ marginTop: .5 }} variant="determinate" value={normalise(progress?.currValue ?? 0)} />
+            <div className="row justify-content-between no-gutters">
+                <div>
+                    <Typography variant="caption"><TimeDisplay countDownStyle timeEnum='MINUTES' seconds={progress?.currValue ?? 0} /></Typography>
+                </div>
+                <div>
+                    <Typography variant="caption"><TimeDisplay countDownStyle timeEnum='MINUTES' seconds={progress?.maxValue ?? 0} /></Typography>
+                </div>
+            </div>
         </>
     )
 
