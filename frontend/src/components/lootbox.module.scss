@@ -1,0 +1,30 @@
+.card-wrapper-wrapper{
+    overflow: hidden;
+    width: 100%;
+}
+
+.card-wrapper{
+    gap: 10px;
+    width: fit-content;
+    margin-left: calc(50% + 150px * 3);
+    animation: transform 8s cubic-bezier(0.42, 0, 0, 1.01) forwards;
+
+}
+
+.card {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    transform: translateX(105px);
+}
+
+@keyframes transform {
+    0% {
+        transform: translateX(calc(calc( -150px * 3) - 50%));
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}

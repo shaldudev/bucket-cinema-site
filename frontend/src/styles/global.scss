@@ -49,17 +49,8 @@ html, body {
     width: 100%;
 }
 
-a:not(.no-anim) {
-    text-decoration: none !important;
-    padding: 0 0 4px 0;
-	border-bottom: 2px solid transparent;
-	transition: 0.3s ease;
-	&:hover{
-        font-weight: bold;
-        color: inherit;
-		padding: 0 0 6px 0;
-		border-color: var(--app-palette-primary-main);
-	}
+a {
+    color: inherit !important;
 }
 
 .MuiAvatar-circular{
