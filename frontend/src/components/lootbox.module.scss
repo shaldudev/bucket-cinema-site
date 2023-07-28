@@ -1,9 +1,9 @@
-.card-wrapper-wrapper{
+.card-wrapper-wrapper {
     overflow: hidden;
     width: 100%;
 }
 
-.card-wrapper{
+.card-wrapper {
     gap: 10px;
     width: fit-content;
     margin-left: calc(50% + 150px * 3);
@@ -12,6 +12,7 @@
 }
 
 .card {
+    font-size: 3rem;
     height: 150px;
     display: flex;
     justify-content: center;
@@ -20,10 +21,23 @@
     transform: translateX(105px);
 }
 
+.stopper {
+    height: 35px;
+    width: 35px;
+    background: lighten($color: #333333, $amount: 10);
+    left: 50%;
+    position: relative;
+    transform: translate(-50%, -50%) rotate(45deg);
+    border-radius: 2px;
+
+}
+
+
 @keyframes transform {
     0% {
-        transform: translateX(calc(calc( -150px * 3) - 50%));
+        transform: translateX(calc(calc(-150px * 3) - 50%));
     }
+
     100% {
         transform: translateX(-100%);
     }

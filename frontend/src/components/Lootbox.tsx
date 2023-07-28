@@ -62,6 +62,12 @@ export default function Lootbox() {
                         </Paper>
                     ))}
                 </div>
+
+            </div>
+
+            <div className={`${styles['stopper']}`}>
+
+
             </div>
         </div>
     );
