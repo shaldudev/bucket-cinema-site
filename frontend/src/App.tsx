@@ -74,6 +74,12 @@ function App() {
 
   }, []);
 
+
+
+  const setCredits = (credits: number) => {
+    setUser({ ...user!, credits });
+  };
+
   return (
     <Router>
       <ThemeProvider  theme={darkTheme}>
@@ -81,7 +87,7 @@ function App() {
         <Experimental_CssVarsProvider defaultColorScheme={'dark'} defaultMode='dark' theme={experimental_extendTheme(options)}>
 
 
-          <UserContext.Provider value={{ user }}>
+          <UserContext.Provider value={{ user, setCredits }}>
             <Navigation />
             <Routes>
 

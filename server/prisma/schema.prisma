@@ -14,6 +14,7 @@ model User {
   avatar    String
   currency  Currency?
   sessions  Session[]
+  lootboxes Lootbox[]
   createdAt DateTime    @default(now())
   lastLogin DateTime    @default(now())
 }
@@ -32,4 +33,15 @@ model Session {
   userId    String
   createdAt DateTime    @default(now())
   user      User        @relation(fields: [userId], references: [id])
+}
+
+model Lootbox {
+  id        String      @id @default(uuid()) @unique
+  entryCost Int
+  payout    Int
+  status    String      @default("PENDING") // PENDING, LOSS, WIN
+  userId    String
+  user      User        @relation(fields: [userId], references: [id])
+  payoutDate DateTime
+  createdAt DateTime    @default(now())
 }

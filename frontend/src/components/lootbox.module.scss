@@ -7,8 +7,11 @@
     gap: 10px;
     width: fit-content;
     margin-left: calc(50% + 150px * 3);
-    animation: transform 8s cubic-bezier(0.42, 0, 0, 1.01) forwards;
+    transform: translateX(calc( -50% ));
+}
 
+.active {
+    animation: transform 8s cubic-bezier(0.42, 0, 0, 1.01) forwards;
 }
 
 .card {
@@ -35,10 +38,12 @@
 
 @keyframes transform {
     0% {
-        transform: translateX(calc(calc(-150px * 3) - 50%));
+        transform: translateX(calc( -50% ));
+        opacity: 0;
     }
 
     100% {
         transform: translateX(-100%);
+        opacity: 1;
     }
 }
